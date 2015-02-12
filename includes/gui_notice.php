@@ -27,5 +27,5 @@ foreach($_POST as $key=>$val){
 <input type="submit" name="yes" value="Yes, I am aware of the risks.">&nbsp;&nbsp;&nbsp;<input type="button" name="no" onclick="history.back();" value="No, return to the previous page">&nbsp;&nbsp;&nbsp;<input type="submit" name="force_http" value="No, force http connections">
 <br>Note: You will no longer be warned of secure connections if you choose "Yes".
 </form>
-</div></p>
+</div>
 </body>

@@ -1,7 +1,7 @@
 <?php
 class knCache{
-	$cache_location = "";
-	$address_key = "";
+	var $cache_location = "";
+	var $address_key = "";
 	function is_cached($url=false){
 		//Generate the URL's key
 		if($url !== false)
@@ -10,10 +10,10 @@ class knCache{
 			return false;
 		return true;
 	}
-	function is_expired($url,$expires=false){
+	function is_expired($url, $expires=false) {
 		if(!$this->is_cached($url))
 			return true;
-		$fp = fopen(dirname(__FILE__) . '/cache/' . $this->address_key)
+		$fp = fopen(dirname(__FILE__) . '/cache/' . $this->address_key);
 	}
 }
 ?>

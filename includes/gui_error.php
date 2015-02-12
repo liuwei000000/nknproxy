@@ -51,5 +51,5 @@ The whole of content returned was <?php echo strlen($knHTTP->content);?> bytes o
 	}else
 		echo '<em class="a">knHTTP return body(html encoded):</em> <a href="javascript:void(0);" onclick="k.tb();">Show/Hide</a><div id="ret_body" style="display:none;">' . preg_replace('~\t~','&nbsp;&nbsp;&nbsp;&nbsp;',preg_replace('~\n\r*~','<br>',preg_replace('~<~','&lt;',$knHTTP->content))) . '</div>';
 };?>
-</div><a href="javascript:history.back();"><br>Go Back to Previous Page</a></p>
+</div><a href="javascript:history.back();"><br>Go Back to Previous Page</a>
 </body></html>

@@ -118,6 +118,7 @@ class knParser{
 		$len = strlen($js);
 		$in = false;$temp = 0;$regex = false;$comment = false;$slcmt = false;
 		$lastStringIterator = '';
+		$li = "";
 		while($ptr < $len){
 			if(!$comment && $js[$ptr] =="\\"){$ptr+=2;continue;}
 			if(($js[$ptr] == "'" || $js[$ptr] == '"') && !$in && !$comment && !$regex && !$slcmt){
@@ -187,12 +188,14 @@ class knParser{
 		if(preg_match('~^http://(www\.)*w3\.org~',$jsStr))
 			return $jsStr;//This is for initing namespaces probably.
 		$unesc = preg_replace('~\\\\/~','/',$jsStr);
-		if(preg_match('~^https*://~',$unesc,$m) || preg_match('~^//~',$unesc,$m)){
+		if(preg_match('~^https*://~',$unesc, $m) || preg_match('~^//~',$unesc,$m)){
 			//This string is probably an absolute address
-			if($unesc == $jsStr)
-				return $this->toAbsoluteUrl($m[1]) . '&x=';
-			else
-				return preg_replace('~/~',"\\/",$this->toAbsoluteUrl($m[1])) . '&x=';
+			if (sizeof($m) >= 2) {
+			    if($unesc == $jsStr)
+				    return $this->toAbsoluteUrl($m[1]) . '&x=';
+			    else
+				    return preg_replace('~/~',"\\/",$this->toAbsoluteUrl($m[1])) . '&x=';
+			}
 		}
 		if(preg_match('~^/~',$unesc) && (preg_match('~\..{0,5}$~',$unesc) || preg_match('~/[a-zA-Z0-9\-_=]$~iUs',$unesc))){
 			if($unesc == $jsStr)
@@ -200,6 +203,7 @@ class knParser{
 			else
 				return preg_replace('~/~',"\\/",$this->toAbsoluteUrl($unesc)) . '&x=';
 		}
+		$esc = false;
 		if($unesc != $jsStr)
 			$esc = true;
 		$unesc = preg_replace_callback('~(href|src|codebase|url|action)\s*=\s*([\'\"])(?(2) (.*?)\\2 | ([^\s\>]+))~isx',array('self','__cb_url'),$unesc);
