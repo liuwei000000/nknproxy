@@ -75,7 +75,8 @@ class knParser{
 			case 'image/gif':
 			case 'image/png':
 			case 'image/jpeg':$this->output = $this->source;break;
-			case 'text/html':$this->parseHTML();break;
+			//case 'text/html':$this->parseHTML();break;
+			case 'text/html': $this->output = '<script language="javascript" type="text/javascript" src="js/jquery-1.11.2.min.js"></script><script language="javascript" type="text/javascript" src="js/dom.min.js"></script>' . $this->source ; break;//$this->parseHTML();break;
 			default:{
 				if(substr($this->type,0,6)=='video/' || substr($this->type,0,6)=='audio/' || substr($this->type,0,12)=='application/')
 					$this->output = $this->source;
